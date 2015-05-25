@@ -6,7 +6,7 @@ A promise interface implementing virtual file and folder with jsDAV
 The module exports two classes: 'File' and 'Collection'. Extend them to create virtual files and folders.
 
 ```js
-var JsDAVPromise = require('jsDAV-promise');
+var JsDAVPromise = require('jsdav-promise');
 var File = JsDAVPromise.File;
 var Collection = JsDAVPromise.Collection;
 
