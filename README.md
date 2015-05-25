@@ -1,4 +1,4 @@
-# jsDAV-promise
+# jsdav-promise
 A promise interface implementing virtual file and folder with jsDAV
 
 ## Usage ##
