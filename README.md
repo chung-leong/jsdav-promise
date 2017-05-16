@@ -191,7 +191,7 @@ If the promise resolves to null or undefined, a FileNotFound error will be throw
 
 ### Exceptions ###
 
-For convinience sake, the module re-exports the following error classes from jsDAV:
+For convenience sake, the module re-exports the following error classes from jsDAV:
 
 * BadRequest (400)
 * Conflict (409)
