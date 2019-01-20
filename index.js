@@ -1,13 +1,13 @@
 'use strict';
 
-var JsDAVFile = require("../../jsDAV/lib/DAV/file");
-var JsDAVCollection = require("../../jsDAV/lib/DAV/collection");
-var JsDAVExceptions = require("../../jsDAV/lib/shared/exceptions"); 
+var JsDAVFile = require("../jsDAV/lib/DAV/file");
+var JsDAVCollection = require("../jsDAV/lib/DAV/collection");
+var JsDAVExceptions = require("../jsDAV/lib/shared/exceptions"); 
 
 var Node = {
     name: '',
     path: '',
-    
+
     try: function(action, callback) {
         try {
             var p = action.call(this);
@@ -16,7 +16,7 @@ var Node = {
                 p.then(callback.bind(null, null), callback);
             } else {
                 /* invoke callback immediately */
-                callback(null, p);                
+                callback(null, p);
             }
         } catch(err) {
             /* catch any synchronous error */
@@ -30,7 +30,7 @@ var Node = {
             return this.deleteAsync().then(checkResult);
         }, callback);
     },
-                         
+
     exists: function(callback) {
         this.try(function() {
             if (this.existsAsync) {
@@ -50,7 +50,7 @@ var Node = {
             return (this.getLastModifiedAsync) ? this.getLastModifiedAsync().then(checkResult) : new Date;
         }, callback);
     },
-    
+
     getName: function() {
         return this.name;
     },
@@ -86,21 +86,21 @@ var Collection = {
             }
         }, callback);
     },
-    
+
     createDirectory: function(name, callback) {
         this.try(function() {
             checkFunction(this.createDirectoryAsync);
             return this.createDirectoryAsync(name).then(checkResult);
         }, callback);
     },
-    
+
     createFile: function(name, data, type, callback) {
         this.try(function() {
             checkFunction(this.createFileAsync);
             return this.createFileAsync(name, data, type).then(checkResult);
         }, callback);
     },
-    
+
     getChild: function(name, callback) {
         this.try(function() {
             if (this.getChildAsync) {
@@ -118,7 +118,7 @@ var Collection = {
             }
         }, callback);
     },
-    
+
     getChildren: function(callback) {
         this.try(function() {
             return (this.getChildrenAsync) ? this.getChildrenAsync().then(checkResult) : [];
@@ -205,4 +205,3 @@ exports.UnprocessableEntity = function(msg, extra) {
     this.message = msg || this.type;
 };
 exports.UnprocessableEntity.prototype = new JsDAVExceptions.jsDAV_Exception();
-

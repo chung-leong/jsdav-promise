@@ -1,7 +1,7 @@
 # jsdav-promise
 A promise interface implementing virtual file and folder with jsDAV
 
-## Usage ##
+## Usage - ES5 ##
 
 The module exports two classes: 'File' and 'Collection'. Extend them to create virtual files and folders.
 
@@ -16,19 +16,19 @@ var SomeFolder = Collection.extend(
         this.name = name;
         this.path = '/' + name;
     },
-    
+
     createDirectoryAsync: function(name) {
 	/* ... */
     },
-    
+
     deleteAsync: function() {
 	/* ... */
     },
-    
+
     getChildrenAsync: function() {
 	/* ... */
     },
-    
+
     setNameAsync: function(name) {
 	/* ... */
     },    
@@ -40,39 +40,108 @@ var SomeFile = File.extend(
         this.name = name;
 	this.path = folder.path + '/' + name;
     },
-    
+
     getAsync: function() {
-	/* ... */
+	    /* ... */
     },
 
     putAsync: function(data, type) {
-	/* ... */
+	    /* ... */
     },
-    
+
     deleteAsync: function() {
-	/* ... */
+	    /* ... */
     },
-                         
+
     getSizeAsync: function() {
-	/* ... */
+	    /* ... */
     },
-    
+
     getETagAsync: function() {
-	/* ... */
+	    /* ... */
     },
 
     getContentTypeAsync: function() {
-	/* ... */
+	    /* ... */
     },
-    
+
     getLastModifiedAsync: function() {
-	/* ... */
+	    /* ... */
     },
 
     setNameAsync: function(name) {
-	/* ... */
+	    /* ... */
     },
 });
+```
+
+## Usage - ES7 ##
+
+```js
+const { File, Collection } = require('jsdav-promise/es6');
+
+class SomeFolder extends Collection {
+    constructor(name) {
+        super();
+        this.name = name;
+        this.path = '/' + name;
+    }
+
+    async createDirectoryAsync(name) {
+	    /* ... */
+    }
+
+    async deleteAsync() {
+	    /* ... */
+    }
+
+    async getChildrenAsync() {
+	    /* ... */
+    }
+
+    async setNameAsync(name) {
+	    /* ... */
+    }
+}
+
+class SomeFile extends File {    
+    constructor(folder, name) {
+        this.name = name;
+	    this.path = folder.path + '/' + name;
+    }
+
+    async getAsync() {
+	    /* ... */
+    }
+
+    async putAsync(data, type) {
+	    /* ... */
+    }
+
+    async deleteAsync() {
+	    /* ... */
+    }
+
+    async getSizeAsync() {
+	    /* ... */
+    }
+
+    async getETagAsync() {
+	    /* ... */
+    }
+
+    async getContentTypeAsync() {
+	    /* ... */
+    }
+
+    async getLastModifiedAsync() {
+	    /* ... */
+    }
+
+    async setNameAsync(name) {
+	    /* ... */
+    }
+}
 ```
 
 ### Methods for both File and Collection ###
@@ -87,7 +156,7 @@ If the promise resolves to null or undefined, a FileNotFound error will be throw
 
 ### getLastModifiedAsync() ####
 
-Get the last-modified date of the file or folder. Should return a promise of a Date object. 
+Get the last-modified date of the file or folder. Should return a promise of a Date object.
 
 If not implemented, the current date is returned.
 
@@ -95,7 +164,7 @@ If the promise resolves to null or undefined, a FileNotFound error will be throw
 
 ### getName() ###
 
-Get the name of the file or folder. Should return a string. 
+Get the name of the file or folder. Should return a string.
 
 The default implementation return this.name.
 
@@ -133,7 +202,7 @@ If the promise resolves to null or undefined, a FileNotFound error will be throw
 
 #### getChildAsync(name) ####
 
-Get a child by name. Should return a promise of a object extending either File or Collection--or null if the child does not exists. 
+Get a child by name. Should return a promise of a object extending either File or Collection--or null if the child does not exists.
 
 If not implemented, getChildren() will be called to find the child.
 
@@ -183,7 +252,7 @@ If the promise resolves to null or undefined, a FileNotFound error will be throw
 
 #### putAsync(data, type) ####
 
-Replace the contents of a virtual file. Should return a promise of true. 
+Replace the contents of a virtual file. Should return a promise of true.
 
 If not implemented, a Forbidden error will be thrown when the client attempts to perform the operation.
 
@@ -217,4 +286,3 @@ For convenience sake, the module re-exports the following error classes from jsD
 * ServiceUnavailable (503)
 * UnsupportedMediaType (415)
 * UnprocessableEntity (422)
-

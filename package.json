@@ -2,7 +2,7 @@
   "name": "jsdav-promise",
   "version": "0.0.1",
   "description": "A promise interface implementing virtual file and folder with jsDAV",
-  "main": "lib/index.js",
+  "main": "index.js",
   "repository": "https://github.com/chung-leong/jsdav-promise.git",
   "keywords": [
     "jsDAV",
