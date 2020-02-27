@@ -1,8 +1,14 @@
 'use strict';
 
-var JsDAVFile = require("../jsDAV/lib/DAV/file");
-var JsDAVCollection = require("../jsDAV/lib/DAV/collection");
-var JsDAVExceptions = require("../jsDAV/lib/shared/exceptions"); 
+var packages = [ '@pylonide/jsdav', '@folk-org/js-dav', 'jsDAV' ];
+for (var i = 0; i < packages.length; i++) {
+    try {
+        var JsDAVFile = require(packages[i] + "/lib/DAV/file");
+        var JsDAVCollection = require(packages[i] + "/lib/DAV/collection");
+        var JsDAVExceptions = require(packages[i] + "/lib/shared/exceptions");
+    } catch (err) {
+    }
+}
 
 var Node = {
     name: '',
